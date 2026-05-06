@@ -2,21 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Build Docker') {
-            steps {
-                sh 'docker compose build'
-            }
-        }
 
-        stage('Run Containers') {
-            steps {
-                sh 'docker compose up -d'
-            }
-        }
-
-        stage('Check Containers') {
+        stage('Check Docker') {
             steps {
                 sh 'docker ps'
+            }
+        }
+
+        stage('Check Kubernetes') {
+            steps {
+                sh 'kubectl get pods'
+            }
+        }
+
+        stage('Deployment Successful') {
+            steps {
+                echo 'Pipeline executed successfully'
             }
         }
     }
