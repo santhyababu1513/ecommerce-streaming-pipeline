@@ -27,3 +27,14 @@ services:
       context: ./spark
     depends_on:
       - kafka
+
+  n8n:
+    image: n8nio/n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+volumes:
+  n8n_data:
